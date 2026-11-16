@@ -1,0 +1,1468 @@
+
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVERMERCH — International Resale | Оригинальный мерч артистов в России</title>
+    <!-- Подключение Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Подключение Google Fonts: Inter & Oswald для акцентных заголовков -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Oswald', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#0D131D',
+                            surface: '#16202E',
+                            card: '#1E293B',
+                            cardHover: '#233042',
+                            border: '#334155',
+                            steel: '#476B8E',
+                            steelLight: '#6488AE',
+                            red: '#C80815',
+                            redHover: '#DC2626',
+                            text: '#F8FAFC',
+                            muted: '#94A3B8'
+                        }
+                    },
+                    boxShadow: {
+                        'glow-red': '0 0 25px rgba(200, 8, 21, 0.35)',
+                        'glow-steel': '0 0 30px rgba(71, 107, 142, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Кастомный скроллбар в темной эстетике */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0D131D;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #476B8E;
+        }
+
+        /* Скрытие скроллбара для горизонтальных тегов на мобильных */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Тонкая сетка на фоне */
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(71, 107, 142, 0.07) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(71, 107, 142, 0.07) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-text font-sans antialiased selection:bg-brand-red selection:text-white overflow-x-hidden">
+
+    <!-- Уведомление (Toast) вместо alert() -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none max-w-sm w-full px-4 sm:px-0"></div>
+
+    <!-- ========================================================= -->
+    <!-- 1. ШАПКА САЙТА (HEADER)                                   -->
+    <!-- ========================================================= -->
+    <header class="sticky top-0 z-40 bg-brand-bg/90 backdrop-blur-md border-b border-brand-border/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 gap-4">
+                
+                <!-- Логотип OVERMERCH (векторная реконструкция загруженного логотипа) -->
+                <a href="#" class="flex items-center gap-3 group shrink-0">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-b from-[#233042] to-[#0D131D] border border-brand-steel/50 flex items-center justify-center shadow-glow-steel group-hover:border-brand-steelLight transition-all">
+                        <svg class="w-8 h-8" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Глобус -->
+                            <circle cx="27" cy="28" r="17" fill="#1E293B" stroke="#94A3B8" stroke-width="2.2"/>
+                            <ellipse cx="27" cy="28" rx="8" ry="17" stroke="#94A3B8" stroke-width="1.8"/>
+                            <path d="M10.5 24H43.5M10.5 33H43.5" stroke="#94A3B8" stroke-width="1.8"/>
+                            <!-- Звезда на глобусе -->
+                            <path d="M20 17L21.3 19.6L24.2 20L22.1 22L22.6 24.9L20 23.5L17.4 24.9L17.9 22L15.8 20L18.7 19.6L20 17Z" fill="#0D131D" stroke="#CBD5E1" stroke-width="1.2"/>
+                            <!-- Пакет мерча -->
+                            <path d="M32 23L47 26L51 49L28 45L32 23Z" fill="#233042" stroke="#CBD5E1" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M37 24C37 19.5 40.5 17 43.5 18C46.5 19 47.5 22.5 46.5 26" stroke="#CBD5E1" stroke-width="2.2" stroke-linecap="round"/>
+                            <!-- Две стрелки ресейла -->
+                            <path d="M13 36C15 44 26 46 39 38" stroke="#E2E8F0" stroke-width="2.6" stroke-linecap="round"/>
+                            <path d="M35 35L41 37L38.5 42.5" stroke="#E2E8F0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17 43C20 49 29 51 41 44" stroke="#6488AE" stroke-width="2.2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-black tracking-wider text-white leading-none">OVER<span class="text-brand-red">MERCH</span></span>
+                        <span class="text-[9px] font-bold tracking-[0.22em] text-brand-muted uppercase mt-1">International Resale</span>
+                    </div>
+                </a>
+
+                <!-- Десктопная навигация -->
+                <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-brand-muted">
+                    <a href="#catalog" class="hover:text-white transition-colors">Каталог</a>
+                    <a href="#artists-bar" class="hover:text-white transition-colors">Артисты</a>
+                    <a href="#guarantees" class="hover:text-white transition-colors">Гарантия оригинала</a>
+                    <a href="#guarantees" class="hover:text-white transition-colors">Доставка в РФ</a>
+                    <a href="#concierge" class="text-brand-steelLight hover:text-white transition-colors flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
+                        Индивидуальный заказ
+                    </a>
+                </nav>
+
+                <!-- Поиск и корзина -->
+                <div class="flex items-center gap-3 flex-1 max-w-xs lg:max-w-sm justify-end">
+                    <!-- Строка поиска -->
+                    <div class="relative w-full hidden sm:block">
+                        <input 
+                            type="text" 
+                            id="header-search"
+                            placeholder="Артист, худи, винил..." 
+                            class="w-full bg-brand-surface border border-brand-border rounded-xl pl-9 pr-8 py-2 text-sm text-white placeholder-brand-muted focus:outline-none focus:border-brand-steelLight transition-colors"
+                        >
+                        <svg class="w-4 h-4 text-brand-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        <button id="clear-search-btn" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-brand-muted hover:text-white text-xs">✕</button>
+                    </div>
+
+                    <!-- Кнопка корзины -->
+                    <button 
+                        onclick="toggleCart(true)" 
+                        class="relative p-2.5 rounded-xl bg-brand-card border border-brand-border hover:border-brand-steelLight text-white transition-all flex items-center gap-2 shrink-0"
+                        aria-label="Открыть корзину"
+                    >
+                        <svg class="w-5 h-5 text-brand-steelLight" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                        <span class="hidden md:inline text-sm font-semibold">Корзина</span>
+                        <span id="cart-badge" class="bg-brand-red text-white text-xs font-bold px-1.5 py-0.5 rounded-md min-w-[20px] text-center">0</span>
+                    </button>
+
+                    <!-- Кнопка мобильного меню -->
+                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-brand-card border border-brand-border text-brand-muted hover:text-white">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Мобильный поиск и выпадающее меню -->
+            <div id="mobile-menu" class="hidden lg:hidden pb-4 border-t border-brand-border/60 pt-3 space-y-3">
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="mobile-search"
+                        placeholder="Поиск по артистам и товарам..." 
+                        class="w-full bg-brand-surface border border-brand-border rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-brand-muted focus:outline-none focus:border-brand-steelLight"
+                    >
+                    <svg class="w-4 h-4 text-brand-muted absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-sm font-medium">
+                    <a href="#catalog" onclick="toggleMobileMenu()" class="p-2.5 rounded-lg bg-brand-surface text-white">Каталог</a>
+                    <a href="#artists-bar" onclick="toggleMobileMenu()" class="p-2.5 rounded-lg bg-brand-surface text-white">Артисты</a>
+                    <a href="#guarantees" onclick="toggleMobileMenu()" class="p-2.5 rounded-lg bg-brand-surface text-brand-muted">Гарантия и доставка</a>
+                    <a href="#concierge" onclick="toggleMobileMenu()" class="p-2.5 rounded-lg bg-brand-surface text-brand-red font-semibold">Выкуп под заказ</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================================= -->
+    <!-- 2. ГЛАВНЫЙ БАННЕР (HERO SECTION — В СТИЛЕ МАКЕТА)          -->
+    <!-- ========================================================= -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-[#1C2636] via-[#131B28] to-[#0D131D] border-b border-brand-border">
+        <!-- Фоновая графика глобуса, бирки и 3 стрелок как на загруженном баннере -->
+        <div class="absolute inset-y-0 right-0 w-full lg:w-3/5 pointer-events-none overflow-hidden flex items-center justify-end opacity-40 lg:opacity-65">
+            <svg class="w-[540px] sm:w-[680px] lg:w-[780px] h-auto translate-x-12 sm:translate-x-16 -translate-y-4" viewBox="0 0 700 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Глобус на фоне -->
+                <circle cx="430" cy="180" r="195" fill="#1E2C3F" stroke="#476B8E" stroke-width="10"/>
+                <ellipse cx="430" cy="180" rx="95" ry="195" stroke="#476B8E" stroke-width="9"/>
+                <ellipse cx="430" cy="180" rx="160" ry="195" stroke="#476B8E" stroke-width="6" stroke-opacity="0.6"/>
+                <path d="M238 140H622M242 230H618M275 70H585" stroke="#476B8E" stroke-width="9"/>
+                <!-- Звезда -->
+                <path d="M355 75L368 102L398 106L376 127L381 156L355 142L329 156L334 127L312 106L342 102L355 75Z" fill="#0D131D" stroke="#6488AE" stroke-width="6"/>
+                
+                <!-- Бирка / Пакет справа -->
+                <path d="M460 155L625 90L720 340L440 470L345 270L460 155Z" fill="#1A2433" stroke="#476B8E" stroke-width="10" stroke-linejoin="round"/>
+                <circle cx="525" cy="175" r="18" fill="#0D131D" stroke="#476B8E" stroke-width="8"/>
+                <path d="M525 175C550 135 610 105 665 115" stroke="#6488AE" stroke-width="10" stroke-linecap="round"/>
+
+                <!-- Три фирменные изогнутые стрелки ресейла -->
+                <g filter="drop-shadow(0px 10px 18px rgba(0,0,0,0.6))">
+                    <!-- Верхняя стрелка -->
+                    <path d="M250 185C220 280 340 315 510 265" stroke="#6488AE" stroke-width="18" stroke-linecap="round"/>
+                    <path d="M485 232L555 252L508 308L485 232Z" fill="#6488AE"/>
+                    <!-- Средняя стрелка -->
+                    <path d="M225 275C205 375 335 415 515 360" stroke="#537699" stroke-width="18" stroke-linecap="round"/>
+                    <path d="M490 326L560 346L513 402L490 326Z" fill="#537699"/>
+                    <!-- Нижняя стрелка -->
+                    <path d="M210 365C200 465 335 510 520 455" stroke="#41607E" stroke-width="18" stroke-linecap="round"/>
+                    <path d="M495 422L565 442L518 498L495 422Z" fill="#41607E"/>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Затемняющий градиент слева для идеальной читаемости текста -->
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0D131D] via-[#0D131D]/85 to-transparent pointer-events-none"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
+            <div class="max-w-2xl">
+                <!-- Верхний бейдж -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-card/90 border border-brand-steel/40 text-xs font-semibold text-brand-steelLight mb-6 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-brand-red"></span>
+                    <span>ОФИЦИАЛЬНЫЙ РЕСЕЙЛ В РОССИИ • 100% LEGIT</span>
+                </div>
+
+                <!-- Фирменная перекрывающаяся типографика OVER / MERCH с загруженного баннера -->
+                <div class="relative select-none mb-6">
+                    <div class="font-display font-bold text-7xl sm:text-8xl lg:text-9xl tracking-tight text-white leading-[0.82] drop-shadow-[0_6px_24px_rgba(0,0,0,0.75)]">
+                        OVER
+                    </div>
+                    <div class="font-display font-bold text-6xl sm:text-7xl lg:text-8xl tracking-tight text-brand-red leading-[0.85] -mt-3 sm:-mt-5 ml-14 sm:ml-24 drop-shadow-[0_8px_28px_rgba(0,0,0,0.9)]">
+                        MERCH
+                    </div>
+                    <div class="mt-3 ml-14 sm:ml-24 text-xs sm:text-sm font-bold tracking-[0.28em] text-brand-muted uppercase">
+                        international resale
+                    </div>
+                </div>
+
+                <!-- Описание сервиса -->
+                <p class="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-xl">
+                    Оригинальный официальный мерч мировых артистов, музыкантов и актеров с доставкой по всей России. 
+                    <span class="text-white font-medium">100% проверка подлинности</span> и прозрачный выкуп с официальных сторов США, Европы и Кореи.
+                </p>
+
+                <!-- Кнопки действий -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#catalog" class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-brand-red hover:bg-brand-redHover text-white font-bold text-sm sm:text-base transition-all shadow-glow-red hover:-translate-y-0.5">
+                        <span>Смотреть каталог</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                    <a href="#concierge" class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-brand-card/90 hover:bg-brand-cardHover border border-brand-steel/60 hover:border-brand-steelLight text-white font-semibold text-sm sm:text-base transition-all backdrop-blur-sm">
+                        <svg class="w-5 h-5 text-brand-steelLight" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                        </svg>
+                        <span>Заказать редкий мерч</span>
+                    </a>
+                </div>
+
+                <!-- Мини-статистика доверия -->
+                <div class="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-brand-border/60 max-w-lg">
+                    <div>
+                        <div class="text-xl sm:text-2xl font-extrabold text-white">120+</div>
+                        <div class="text-xs text-brand-muted mt-0.5">Артистов и франшиз</div>
+                    </div>
+                    <div>
+                        <div class="text-xl sm:text-2xl font-extrabold text-white">14–21 дн.</div>
+                        <div class="text-xs text-brand-muted mt-0.5">Доставка из США/ЕС</div>
+                    </div>
+                    <div>
+                        <div class="text-xl sm:text-2xl font-extrabold text-brand-steelLight">100%</div>
+                        <div class="text-xs text-brand-muted mt-0.5">Инвойсы и чеки</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 3. БЛОК ПРЕИМУЩЕСТВ (ПОЧЕМУ OVERMERCH)                    -->
+    <!-- ========================================================= -->
+    <section id="guarantees" class="py-14 bg-brand-surface/50 border-b border-brand-border/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                
+                <!-- Карточка 1 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-steelLight/60 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-red/15 border border-brand-red/30 flex items-center justify-center text-brand-red mb-4 group-hover:scale-105 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">100% Оригинал</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed">
+                        Выкупаем строго с официальных сайтов лейблов, туровых поп-апов и студий. Предоставляем чеки, ордера и фотоотчет со склада.
+                    </p>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-steelLight/60 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-steel/20 border border-brand-steel/40 flex items-center justify-center text-brand-steelLight mb-4 group-hover:scale-105 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Доставка по всей РФ</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed">
+                        Отправка СДЭК или Почтой России до двери и ПВЗ с полной страховкой посылки и трек-номером на каждом этапе.
+                    </p>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-steelLight/60 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-steel/20 border border-brand-steel/40 flex items-center justify-center text-brand-steelLight mb-4 group-hover:scale-105 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Любые артисты</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed">
+                        Поп, рэп, рок, инди, k-pop, а также лимитированный мерч голливудских актеров, сериалов и студий (A24, HBO, Marvel).
+                    </p>
+                </div>
+
+                <!-- Карточка 4 -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-steelLight/60 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-red/15 border border-brand-red/30 flex items-center justify-center text-brand-red mb-4 group-hover:scale-105 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Выкуп под заказ</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed">
+                        Не нашли нужный дроп в каталоге? Пришлите ссылку на официальный стор — выкупим и привезем специально для вас.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 4. ИНТЕРАКТИВНЫЙ КАТАЛОГ ТОВАРОВ                          -->
+    <!-- ========================================================= -->
+    <main id="catalog" class="py-16 bg-grid-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Заголовок секции -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div>
+                    <div class="text-xs font-bold tracking-widest text-brand-steelLight uppercase mb-1.5">OFFICIAL DROPS & ARCHIVE</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Каталог оригинального мерча</h2>
+                </div>
+                <div class="text-sm text-brand-muted">
+                    Показано позиций: <span id="products-count" class="text-white font-bold">10</span>
+                </div>
+            </div>
+
+            <!-- Панель фильтров по категориям и статусу -->
+            <div class="flex flex-wrap items-center gap-2.5 mb-5" id="category-filters">
+                <button data-category="all" class="cat-btn active px-4 py-2.5 rounded-xl text-sm font-semibold bg-brand-red text-white border border-brand-red transition-all">
+                    Все товары
+                </button>
+                <button data-category="musicians" class="cat-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-brand-card text-brand-muted hover:text-white border border-brand-border transition-all">
+                    Певцы и группы
+                </button>
+                <button data-category="actors" class="cat-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-brand-card text-brand-muted hover:text-white border border-brand-border transition-all">
+                    Актеры и кино
+                </button>
+                <button data-category="in-stock" class="cat-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-brand-card text-brand-muted hover:text-white border border-brand-border transition-all flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    В наличии в РФ
+                </button>
+                <button data-category="preorder" class="cat-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-brand-card text-brand-muted hover:text-white border border-brand-border transition-all flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-brand-steelLight"></span>
+                    Под заказ
+                </button>
+            </div>
+
+            <!-- Теги популярных артистов -->
+            <div id="artists-bar" class="mb-8">
+                <div class="text-xs font-semibold text-brand-muted uppercase tracking-wider mb-2.5">Популярные артисты и франшизы:</div>
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2" id="artist-tags">
+                    <!-- Теги генерируются скриптом -->
+                </div>
+            </div>
+
+            <!-- Сетка карточек товаров -->
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Карточки товаров рендерятся через JS -->
+            </div>
+
+            <!-- Сообщение, если по фильтрам ничего не найдено -->
+            <div id="empty-state" class="hidden text-center py-16 bg-brand-card/60 border border-brand-border rounded-2xl">
+                <div class="w-16 h-16 rounded-full bg-brand-surface border border-brand-border flex items-center justify-center mx-auto mb-4 text-brand-steelLight">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">По вашему запросу ничего не найдено</h3>
+                <p class="text-sm text-brand-muted max-w-md mx-auto mb-6">
+                    Попробуйте сбросить фильтры или оформите индивидуальный выкуп — мы привезем мерч любого артиста напрямую из официального магазина.
+                </p>
+                <div class="flex justify-center gap-3">
+                    <button onclick="resetFilters()" class="px-5 py-2.5 rounded-xl bg-brand-surface border border-brand-border hover:border-brand-steelLight text-sm font-semibold text-white transition-all">
+                        Сбросить фильтры
+                    </button>
+                    <a href="#concierge" class="px-5 py-2.5 rounded-xl bg-brand-red hover:bg-brand-redHover text-sm font-semibold text-white transition-all">
+                        Заказать выкуп
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========================================================= -->
+    <!-- 5. ИНДИВИДУАЛЬНЫЙ ВЫКУП (КОНСЬЕРЖ-СЕРВИС)                 -->
+    <!-- ========================================================= -->
+    <section id="concierge" class="py-16 bg-brand-surface border-t border-b border-brand-border relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-gradient-to-br from-brand-card to-[#131B28] border border-brand-steel/40 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    
+                    <!-- Левая колонка: Описание консьерж-сервиса -->
+                    <div class="lg:col-span-6 space-y-5">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-brand-red/20 border border-brand-red/40 text-brand-red text-xs font-bold uppercase tracking-wider">
+                            Консьерж-сервис OVERMERCH
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                            Нужен редкий мерч или свежий дроп с официального сайта?
+                        </h2>
+                        <p class="text-brand-muted text-sm sm:text-base leading-relaxed">
+                            Мы выкупаем лимитированные коллекции из США, Великобритании, Европы, Японии и Южной Кореи. Вставьте ссылку на официальный стор артиста или просто напишите, что ищете — рассчитаем итоговую цену в рублях с доставкой до вашего города за 15 минут.
+                        </p>
+                        
+                        <div class="space-y-3 pt-2">
+                            <div class="flex items-center gap-3 text-sm text-slate-200">
+                                <span class="w-6 h-6 rounded-full bg-brand-steel/30 text-brand-steelLight flex items-center justify-center font-bold text-xs">1</span>
+                                <span>Выкуп в день обращения (даже во время закрытых предпродаж для фанатов)</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-slate-200">
+                                <span class="w-6 h-6 rounded-full bg-brand-steel/30 text-brand-steelLight flex items-center justify-center font-bold text-xs">2</span>
+                                <span>Фото- и видеоотчет товара на нашем зарубежном складе перед отправкой</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-slate-200">
+                                <span class="w-6 h-6 rounded-full bg-brand-steel/30 text-brand-steelLight flex items-center justify-center font-bold text-xs">3</span>
+                                <span>Оплата в рублях картой любого российского банка или по СБП</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Правая колонка: Форма заявки -->
+                    <div class="lg:col-span-6">
+                        <form id="concierge-form" class="bg-brand-bg/90 border border-brand-border rounded-2xl p-6 sm:p-8 space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-brand-muted uppercase tracking-wider mb-1.5">
+                                    Артист, актер или ссылка на официальный стор *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="concierge-item"
+                                    required
+                                    placeholder="Например: Taylor Swift Eras Tour Hoodie или ссылка на магазин"
+                                    class="w-full bg-brand-surface border border-brand-border rounded-xl px-4 py-3 text-sm text-white placeholder-brand-muted focus:outline-none focus:border-brand-steelLight transition-colors"
+                                >
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-brand-muted uppercase tracking-wider mb-1.5">
+                                        Желаемый размер / формат
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="concierge-size"
+                                        placeholder="L / XL / Цветной винил"
+                                        class="w-full bg-brand-surface border border-brand-border rounded-xl px-4 py-3 text-sm text-white placeholder-brand-muted focus:outline-none focus:border-brand-steelLight transition-colors"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-brand-muted uppercase tracking-wider mb-1.5">
+                                        Ваш Telegram или телефон *
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="concierge-contact"
+                                        required
+                                        placeholder="@username или +7 (999) 000-00-00"
+                                        class="w-full bg-brand-surface border border-brand-border rounded-xl px-4 py-3 text-sm text-white placeholder-brand-muted focus:outline-none focus:border-brand-steelLight transition-colors"
+                                    >
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-brand-muted uppercase tracking-wider mb-1.5">
+                                    Комментарий (необязательно)
+                                </label>
+                                <textarea 
+                                    id="concierge-note"
+                                    rows="2"
+                                    placeholder="Укажите город доставки или особые пожелания к дропу..."
+                                    class="w-full bg-brand-surface border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white placeholder-brand-muted focus:outline-none focus:border-brand-steelLight transition-colors"
+                                ></textarea>
+                            </div>
+
+                            <button 
+                                type="submit" 
+                                class="w-full py-3.5 px-6 rounded-xl bg-brand-red hover:bg-brand-redHover text-white font-bold text-sm sm:text-base transition-all shadow-glow-red flex items-center justify-center gap-2"
+                            >
+                                <span>Рассчитать стоимость выкупа</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </button>
+
+                            <!-- Блок подтверждения отправки формы -->
+                            <div id="concierge-success" class="hidden p-4 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-sm">
+                                <div class="font-bold text-white mb-1">✓ Заявка принята в работу!</div>
+                                <p id="concierge-success-text" class="text-xs leading-relaxed"></p>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 7. ФУТЕР (FOOTER)                                         -->
+    <!-- ========================================================= -->
+    <footer class="bg-[#090D14] pt-14 pb-10 text-brand-muted border-t border-brand-border/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-10 border-b border-brand-border/60">
+                
+                <!-- Бренд -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-card border border-brand-steel/50 flex items-center justify-center">
+                            <svg class="w-6 h-6" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="27" cy="28" r="17" fill="#1E293B" stroke="#94A3B8" stroke-width="2.5"/>
+                                <ellipse cx="27" cy="28" rx="8" ry="17" stroke="#94A3B8" stroke-width="2"/>
+                                <path d="M32 23L47 26L51 49L28 45L32 23Z" fill="#233042" stroke="#CBD5E1" stroke-width="2.2"/>
+                                <path d="M13 36C15 44 26 46 39 38" stroke="#E2E8F0" stroke-width="2.8" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="text-lg font-black text-white tracking-wider">OVER<span class="text-brand-red">MERCH</span></div>
+                            <div class="text-[9px] tracking-[0.22em] uppercase text-brand-muted">International Resale</div>
+                        </div>
+                    </div>
+                    <p class="text-xs leading-relaxed text-brand-muted">
+                        Первый специализированный ресейл-сервис оригинального мерча зарубежных музыкантов, актеров и культовых медиа-франшиз на территории России.
+                    </p>
+                </div>
+
+                <!-- Разделы -->
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Навигация</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#catalog" class="hover:text-white transition-colors">Весь каталог</a></li>
+                        <li><a href="#artists-bar" class="hover:text-white transition-colors">Популярные артисты</a></li>
+                        <li><a href="#guarantees" class="hover:text-white transition-colors">Проверка подлинности</a></li>
+                        <li><a href="#concierge" class="hover:text-white transition-colors">Индивидуальный выкуп</a></li>
+                    </ul>
+                </div>
+
+                <!-- Покупателям -->
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Информация</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><span class="text-slate-300">Доставка по РФ:</span> СДЭК, Почта России</li>
+                        <li><span class="text-slate-300">Срок под заказ:</span> 14–21 рабочий день</li>
+                        <li><span class="text-slate-300">В наличии (Москва):</span> отправка за 24 часа</li>
+                        <li><span class="text-slate-300">Оплата:</span> Карты РФ / СБП</li>
+                    </ul>
+                </div>
+
+                <!-- Контакты -->
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Связь и дропы</h4>
+                    <div class="space-y-3 text-sm">
+                        <a href="#concierge" class="flex items-center gap-2.5 p-3 rounded-xl bg-brand-card border border-brand-border hover:border-brand-steelLight text-white transition-all">
+                            <span class="w-2.5 h-2.5 rounded-full bg-brand-steelLight"></span>
+                            <span>Telegram-канал: @overmerch_ru</span>
+                        </a>
+                        <a href="#concierge" class="flex items-center gap-2.5 p-3 rounded-xl bg-brand-card border border-brand-border hover:border-brand-red text-white transition-all">
+                            <span class="w-2.5 h-2.5 rounded-full bg-brand-red"></span>
+                            <span>Поддержка: @overmerch_support</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Дисклеймер -->
+            <div class="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500">
+                <p class="max-w-3xl leading-relaxed">
+                    Дисклеймер: OVERMERCH является независимой ресейл-платформой и осуществляет выкуп, проверку подлинности и перепродажу исключительно оригинальной продукции официальных брендов, музыкальных лейблов и артистов на территории Российской Федерации. Все товарные знаки принадлежат их законным правообладателям.
+                </p>
+                <div class="shrink-0 font-medium text-brand-muted">
+                    © 2026 OVERMERCH. Все права защищены.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================================= -->
+    <!-- МОДАЛЬНОЕ ОКНО ДЕТАЛЕЙ ТОВАРА                             -->
+    <!-- ========================================================= -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-brand-card border border-brand-border rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative animate-fadeIn">
+            <!-- Кнопка закрытия -->
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-brand-bg/90 border border-brand-border text-brand-muted hover:text-white flex items-center justify-center transition-colors">
+                ✕
+            </button>
+            <div id="product-modal-content" class="p-6 sm:p-8">
+                <!-- Контент рендерится динамически -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- 6. ВЫЕЗЖАЮЩАЯ КОРЗИНА (CART DRAWER)                       -->
+    <!-- ========================================================= -->
+    <div id="cart-overlay" onclick="toggleCart(false)" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm transition-opacity"></div>
+    <aside id="cart-drawer" class="fixed top-0 right-0 z-50 h-full w-full max-w-md bg-brand-bg border-l border-brand-border shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+        
+        <!-- Шапка корзины -->
+        <div class="p-6 border-b border-brand-border flex items-center justify-between bg-brand-surface">
+            <div class="flex items-center gap-2.5">
+                <h3 class="text-xl font-extrabold text-white">Корзина</h3>
+                <span id="drawer-cart-count" class="px-2 py-0.5 rounded-md bg-brand-red text-white text-xs font-bold">0</span>
+            </div>
+            <button onclick="toggleCart(false)" class="p-2 rounded-xl bg-brand-card border border-brand-border text-brand-muted hover:text-white">
+                ✕
+            </button>
+        </div>
+
+        <!-- Список товаров в корзине -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Рендерится через JS -->
+        </div>
+
+        <!-- Блок оформления заказа -->
+        <div id="cart-footer" class="p-6 border-t border-brand-border bg-brand-surface space-y-4">
+            <!-- Выбор способа доставки по РФ -->
+            <div>
+                <label class="block text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">Доставка по России</label>
+                <select id="delivery-method" onchange="updateCartUI()" class="w-full bg-brand-bg border border-brand-border rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-brand-steelLight">
+                    <option value="450">СДЭК до пункта выдачи (ПВЗ) — 450 ₽</option>
+                    <option value="390">Почта России (1 класс со страховкой) — 390 ₽</option>
+                    <option value="690">Курьер по Москве и Санкт-Петербургу — 690 ₽</option>
+                </select>
+            </div>
+
+            <!-- Контакт для оформления -->
+            <div>
+                <input 
+                    type="text" 
+                    id="checkout-contact"
+                    placeholder="Ваш Telegram (@username) или телефон для связи"
+                    class="w-full bg-brand-bg border border-brand-border rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-brand-muted focus:outline-none focus:border-brand-steelLight"
+                >
+            </div>
+
+            <!-- Итоговый расчет -->
+            <div class="space-y-1.5 pt-2 border-t border-brand-border/60 text-sm">
+                <div class="flex justify-between text-brand-muted">
+                    <span>Товары:</span>
+                    <span id="cart-subtotal" class="text-white font-medium">0 ₽</span>
+                </div>
+                <div class="flex justify-between text-brand-muted">
+                    <span>Доставка и страховка:</span>
+                    <span id="cart-shipping" class="text-white font-medium">450 ₽</span>
+                </div>
+                <div class="flex justify-between text-base font-extrabold text-white pt-1.5">
+                    <span>Итого к оплате:</span>
+                    <span id="cart-total" class="text-brand-red text-lg">0 ₽</span>
+                </div>
+            </div>
+
+            <button 
+                onclick="submitOrder()" 
+                class="w-full py-3.5 rounded-xl bg-brand-red hover:bg-brand-redHover text-white font-bold text-sm transition-all shadow-glow-red"
+            >
+                Оформить заказ
+            </button>
+        </div>
+    </aside>
+
+    <!-- ========================================================= -->
+    <!-- JAVASCRIPT ЛОГИКА МАГАЗИНА OVERMERCH                      -->
+    <!-- ========================================================= -->
+    <script>
+        // База товаров (10 продуманных позиций от музыкантов и актеров)
+        const PRODUCTS = [
+            {
+                id: 1,
+                artist: "Billie Eilish",
+                tag: "Billie Eilish",
+                category: "musicians",
+                type: "Худи",
+                title: "HIT ME HARD AND SOFT Blohsh Heavyweight Hoodie",
+                price: 16900,
+                status: "in-stock",
+                statusLabel: "В наличии в РФ",
+                sizes: ["S", "M", "L", "XL"],
+                origin: "Официальный стор Billie Eilish (США, Interscope)",
+                material: "100% органический плотный хлопок 480 г/м², вышивка Blohsh на груди, принт-лирика на спине.",
+                gradient: "from-[#1a2942] via-[#101827] to-[#090d16]",
+                accentColor: "#6488AE",
+                artType: "hoodie"
+            },
+            {
+                id: 2,
+                artist: "The Weeknd",
+                tag: "The Weeknd",
+                category: "musicians",
+                type: "Лонгслив",
+                title: "Hurry Up Tomorrow XO Tour Edition Longsleeve",
+                price: 12400,
+                status: "in-stock",
+                statusLabel: "В наличии в РФ",
+                sizes: ["M", "L", "XL"],
+                origin: "XO Official Store (Лос-Анджелес, США)",
+                material: "100% хлопок премиум-плотности, винтажная варка (washed black), металлизированный принт XO.",
+                gradient: "from-[#2b141a] via-[#161c28] to-[#0d131d]",
+                accentColor: "#C80815",
+                artType: "tee"
+            },
+            {
+                id: 3,
+                artist: "Lana Del Rey",
+                tag: "Lana Del Rey",
+                category: "musicians",
+                type: "Винил",
+                title: "Did You Know That There's a Tunnel Under Ocean Blvd (Exclusive Vinyl)",
+                price: 8900,
+                status: "in-stock",
+                statusLabel: "В наличии в РФ",
+                sizes: ["2LP"],
+                origin: "Polydor / Interscope UK Official Store",
+                material: "Лимитированный двойной цветной винил 180g, разворотный конверт с эксклюзивным буклетом.",
+                gradient: "from-[#233247] via-[#182232] to-[#0d131d]",
+                accentColor: "#94A3B8",
+                artType: "vinyl"
+            },
+            {
+                id: 4,
+                artist: "Travis Scott",
+                tag: "Travis Scott",
+                category: "musicians",
+                type: "Футболка",
+                title: "UTOPIA Circus Maximus Tour Tee — Washed Charcoal",
+                price: 11800,
+                status: "preorder",
+                statusLabel: "Под заказ 14–21 день",
+                sizes: ["S", "M", "L", "XL"],
+                origin: "Cactus Jack Official (США)",
+                material: "Плотный оверсайз-крой, фирменный пуф-принт (объемная печать) с датами мирового тура.",
+                gradient: "from-[#262220] via-[#181f2c] to-[#0d131d]",
+                accentColor: "#6488AE",
+                artType: "tee"
+            },
+            {
+                id: 5,
+                artist: "Pedro Pascal / Кино-мерч",
+                tag: "Pedro Pascal / Кино-мерч",
+                category: "actors",
+                type: "Футболка",
+                title: "A24 × Pedro Pascal Collector's Edition Vintage Tee",
+                price: 10500,
+                status: "in-stock",
+                statusLabel: "В наличии в РФ",
+                sizes: ["S", "M", "L"],
+                origin: "A24 Films Official Shop (Нью-Йорк, США)",
+                material: "100% тяжелый хлопок, шелкография архивного кадра, фирменная тканая бирка A24.",
+                gradient: "from-[#281b24] via-[#17202e] to-[#0d131d]",
+                accentColor: "#C80815",
+                artType: "poster"
+            },
+            {
+                id: 6,
+                artist: "Taylor Swift",
+                tag: "Taylor Swift",
+                category: "musicians",
+                type: "Худи",
+                title: "The Eras Tour International Charcoal Pullover Hoodie",
+                price: 15900,
+                status: "preorder",
+                statusLabel: "Под заказ 14–21 день",
+                sizes: ["S", "M", "L", "XL"],
+                origin: "Taylor Swift Official Store (UMG США)",
+                material: "Мягкий флис с начесом (80% хлопок, 20% полиэстер), принт со всеми эрами на спине.",
+                gradient: "from-[#1e2d42] via-[#141d2b] to-[#0d131d]",
+                accentColor: "#6488AE",
+                artType: "hoodie"
+            },
+            {
+                id: 7,
+                artist: "Sabrina Carpenter",
+                tag: "Sabrina Carpenter",
+                category: "musicians",
+                type: "Кепка",
+                title: "Short n' Sweet Espresso Embroidered Dad Cap",
+                price: 6900,
+                status: "in-stock",
+                statusLabel: "В наличии в РФ",
+                sizes: ["ONE SIZE"],
+                origin: "Island Records Official Merch Store",
+                material: "100% брашированный хлопковый твил, объемная вышивка, металлическая застежка.",
+                gradient: "from-[#21334a] via-[#16202e] to-[#0d131d]",
+                accentColor: "#94A3B8",
+                artType: "cap"
+            },
+            {
+                id: 8,
+                artist: "Charli XCX",
+                tag: "Charli XCX",
+                category: "musicians",
+                type: "Футболка",
+                title: "BRAT Club Classics Tour Oversized T-Shirt",
+                price: 9800,
+                status: "in-stock",
+                statusLabel: "В наличии в РФ",
+                sizes: ["S", "M", "L"],
+                origin: "Atlantic Records UK Official Store",
+                material: "100% плотный хлопок, минималистичный принт спереди и треклист на спине.",
+                gradient: "from-[#1d2b22] via-[#15202e] to-[#0d131d]",
+                accentColor: "#6488AE",
+                artType: "tee"
+            },
+            {
+                id: 9,
+                artist: "Stray Kids",
+                tag: "Stray Kids",
+                category: "musicians",
+                type: "Аксессуар",
+                title: "Official Light Stick Ver.2 + Exclusive Photocard Set",
+                price: 11200,
+                status: "preorder",
+                statusLabel: "Под заказ 14–21 день",
+                sizes: ["STANDARD"],
+                origin: "JYP Shop Official (Сеул, Южная Корея)",
+                material: "Оригинальный лайтстик с поддержкой Bluetooth-синхронизации на концертах и набором карт.",
+                gradient: "from-[#2d1720] via-[#182232] to-[#0d131d]",
+                accentColor: "#C80815",
+                artType: "accessory"
+            },
+            {
+                id: 10,
+                artist: "Pedro Pascal / Кино-мерч",
+                tag: "Pedro Pascal / Кино-мерч",
+                category: "actors",
+                type: "Постер",
+                title: "Dune & Sci-Fi Cinema Guild Heavyweight Crewneck",
+                price: 14500,
+                status: "preorder",
+                statusLabel: "Под заказ 14–21 день",
+                sizes: ["M", "L", "XL"],
+                origin: "Warner Bros. / Legendary Official Archive",
+                material: "Лимитированный свитшот из плотного футера 450 г/м² с архивной кинографикой.",
+                gradient: "from-[#222f40] via-[#16202e] to-[#0d131d]",
+                accentColor: "#6488AE",
+                artType: "hoodie"
+            }
+        ];
+
+        // Список тегов популярных артистов
+        const ARTISTS = [
+            "Все артисты",
+            "Billie Eilish",
+            "The Weeknd",
+            "Lana Del Rey",
+            "Travis Scott",
+            "Taylor Swift",
+            "Sabrina Carpenter",
+            "Charli XCX",
+            "Pedro Pascal / Кино-мерч",
+            "Stray Kids"
+        ];
+
+        // Состояние приложения
+        let state = {
+            category: "all",
+            artist: "Все артисты",
+            search: "",
+            selectedSizes: {}, // { productId: "L" }
+            cart: [] // [{ productId, size, qty }]
+        };
+
+        // Инициализация выбранных размеров по умолчанию
+        PRODUCTS.forEach(p => {
+            state.selectedSizes[p.id] = p.sizes.includes("L") ? "L" : p.sizes[0];
+        });
+
+        // Функция генерации стильной векторной иллюстрации товара
+        function renderProductVisual(product) {
+            const icons = {
+                hoodie: `
+                    <svg class="w-32 h-32 drop-shadow-[0_12px_20px_rgba(0,0,0,0.65)] transition-transform duration-500 group-hover:scale-105" viewBox="0 0 120 120" fill="none">
+                        <path d="M42 22C42 15 78 15 78 22L85 32L104 48L94 64L83 54V98H37V54L26 64L16 48L35 32L42 22Z" fill="#1E293B" stroke="${product.accentColor}" stroke-width="2.5" stroke-linejoin="round"/>
+                        <path d="M44 23C48 31 72 31 76 23" stroke="#94A3B8" stroke-width="2"/>
+                        <path d="M54 30V43M66 30V43" stroke="#CBD5E1" stroke-width="1.8" stroke-linecap="round"/>
+                        <path d="M44 74H76L79 98H41L44 74Z" stroke="#476B8E" stroke-width="1.5"/>
+                        <circle cx="60" cy="54" r="7" stroke="${product.accentColor}" stroke-width="2"/>
+                    </svg>
+                `,
+                tee: `
+                    <svg class="w-32 h-32 drop-shadow-[0_12px_20px_rgba(0,0,0,0.65)] transition-transform duration-500 group-hover:scale-105" viewBox="0 0 120 120" fill="none">
+                        <path d="M43 24C48 30 72 30 77 24L102 38L92 56L80 49V96H40V49L28 56L18 38L43 24Z" fill="#1E293B" stroke="${product.accentColor}" stroke-width="2.5" stroke-linejoin="round"/>
+                        <rect x="48" y="46" width="24" height="28" rx="2" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="3 2"/>
+                        <path d="M53 56H67M53 62H64" stroke="${product.accentColor}" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                `,
+                vinyl: `
+                    <svg class="w-32 h-32 drop-shadow-[0_12px_20px_rgba(0,0,0,0.65)] transition-transform duration-500 group-hover:scale-105" viewBox="0 0 120 120" fill="none">
+                        <rect x="20" y="26" width="58" height="68" rx="4" fill="#1E293B" stroke="#94A3B8" stroke-width="2"/>
+                        <circle cx="76" cy="60" r="30" fill="#0D131D" stroke="${product.accentColor}" stroke-width="2.5"/>
+                        <circle cx="76" cy="60" r="21" stroke="#334155" stroke-width="1.2"/>
+                        <circle cx="76" cy="60" r="14" stroke="#334155" stroke-width="1.2"/>
+                        <circle cx="76" cy="60" r="8" fill="${product.accentColor}"/>
+                        <circle cx="76" cy="60" r="2.5" fill="#0D131D"/>
+                    </svg>
+                `,
+                cap: `
+                    <svg class="w-32 h-32 drop-shadow-[0_12px_20px_rgba(0,0,0,0.65)] transition-transform duration-500 group-hover:scale-105" viewBox="0 0 120 120" fill="none">
+                        <path d="M26 66C26 44 41 32 60 32C79 32 94 44 94 66H26Z" fill="#1E293B" stroke="${product.accentColor}" stroke-width="2.5"/>
+                        <path d="M22 66C36 74 84 74 102 68C94 78 68 83 38 77L22 66Z" fill="#233042" stroke="#CBD5E1" stroke-width="2"/>
+                        <circle cx="60" cy="30" r="3" fill="${product.accentColor}"/>
+                        <path d="M51 52H69" stroke="${product.accentColor}" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                `,
+                poster: `
+                    <svg class="w-32 h-32 drop-shadow-[0_12px_20px_rgba(0,0,0,0.65)] transition-transform duration-500 group-hover:scale-105" viewBox="0 0 120 120" fill="none">
+                        <rect x="30" y="20" width="60" height="80" rx="4" fill="#1E293B" stroke="${product.accentColor}" stroke-width="2.5"/>
+                        <circle cx="60" cy="52" r="14" stroke="#CBD5E1" stroke-width="2"/>
+                        <path d="M42 78H78M48 85H72" stroke="${product.accentColor}" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                `,
+                accessory: `
+                    <svg class="w-32 h-32 drop-shadow-[0_12px_20px_rgba(0,0,0,0.65)] transition-transform duration-500 group-hover:scale-105" viewBox="0 0 120 120" fill="none">
+                        <circle cx="60" cy="40" r="18" fill="#1E293B" stroke="${product.accentColor}" stroke-width="2.5"/>
+                        <path d="M60 28L63 35L70 36L65 41L66 48L60 44L54 48L55 41L50 36L57 35L60 28Z" fill="${product.accentColor}"/>
+                        <rect x="54" y="58" width="12" height="40" rx="4" fill="#233042" stroke="#CBD5E1" stroke-width="2"/>
+                    </svg>
+                `
+            };
+            return icons[product.artType] || icons.tee;
+        }
+
+        // Форматирование цены в рублях
+        function formatPrice(num) {
+            return num.toLocaleString('ru-RU') + ' ₽';
+        }
+
+        // Рендер тегов артистов
+        function renderArtistTags() {
+            const container = document.getElementById('artist-tags');
+            container.innerHTML = ARTISTS.map(artist => {
+                const isActive = state.artist === artist;
+                return `
+                    <button 
+                        onclick="selectArtist('${artist.replace(/'/g, "\\'")}')"
+                        class="shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                            isActive 
+                            ? 'bg-brand-steel text-white border-brand-steelLight shadow-sm' 
+                            : 'bg-brand-surface text-brand-muted border-brand-border hover:text-white hover:border-brand-steel/60'
+                        }"
+                    >
+                        ${artist}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        // Рендер карточек каталога
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const emptyState = document.getElementById('empty-state');
+            const countEl = document.getElementById('products-count');
+
+            // Фильтрация товаров
+            const filtered = PRODUCTS.filter(product => {
+                // Фильтр по категории / статусу
+                if (state.category === 'musicians' && product.category !== 'musicians') return false;
+                if (state.category === 'actors' && product.category !== 'actors') return false;
+                if (state.category === 'in-stock' && product.status !== 'in-stock') return false;
+                if (state.category === 'preorder' && product.status !== 'preorder') return false;
+
+                // Фильтр по артисту
+                if (state.artist !== 'Все артисты' && product.tag !== state.artist) return false;
+
+                // Фильтр по поиску
+                if (state.search.trim() !== '') {
+                    const q = state.search.toLowerCase();
+                    const matchArtist = product.artist.toLowerCase().includes(q);
+                    const matchTitle = product.title.toLowerCase().includes(q);
+                    const matchType = product.type.toLowerCase().includes(q);
+                    if (!matchArtist && !matchTitle && !matchType) return false;
+                }
+
+                return true;
+            });
+
+            countEl.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(product => {
+                const selectedSize = state.selectedSizes[product.id];
+                const isInStock = product.status === 'in-stock';
+
+                return `
+                    <article class="bg-brand-card border border-brand-border hover:border-brand-steelLight/70 rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 shadow-lg">
+                        
+                        <!-- Верхняя зона с визуалом и бейджами -->
+                        <div>
+                            <div onclick="openProductModal(${product.id})" class="relative h-52 bg-gradient-to-br ${product.gradient} flex items-center justify-center p-6 cursor-pointer overflow-hidden border-b border-brand-border/60">
+                                <!-- Фоновый водяной знак -->
+                                <div class="absolute inset-0 flex items-center justify-center opacity-5 font-display text-6xl font-black tracking-widest text-white select-none pointer-events-none">
+                                    OVERMERCH
+                                </div>
+
+                                <!-- Бейдж ОРИГИНАЛ -->
+                                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-brand-red text-white text-[10px] font-extrabold tracking-wider uppercase shadow">
+                                    ОРИГИНАЛ
+                                </span>
+
+                                <!-- Бейдж статуса -->
+                                <span class="absolute top-3 right-3 px-2.5 py-1 rounded-md text-[11px] font-semibold backdrop-blur-md border ${
+                                    isInStock 
+                                    ? 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40' 
+                                    : 'bg-brand-bg/85 text-brand-steelLight border-brand-steel/40'
+                                }">
+                                    ${product.statusLabel}
+                                </span>
+
+                                <!-- Векторный силуэт мерча -->
+                                ${renderProductVisual(product)}
+
+                                <!-- Подсказка быстрого просмотра -->
+                                <span class="absolute bottom-2.5 right-3 text-[11px] text-brand-muted opacity-0 group-hover:opacity-100 transition-opacity bg-brand-bg/80 px-2 py-0.5 rounded">
+                                    Подробнее →
+                                </span>
+                            </div>
+
+                            <!-- Информация о товаре -->
+                            <div class="p-5 pb-3">
+                                <div class="flex items-center justify-between gap-2 mb-1">
+                                    <span class="text-xs font-bold text-brand-steelLight uppercase tracking-wider truncate">
+                                        ${product.artist}
+                                    </span>
+                                    <span class="text-[11px] text-brand-muted shrink-0">${product.type}</span>
+                                </div>
+                                <h3 onclick="openProductModal(${product.id})" class="text-base font-bold text-white leading-snug line-clamp-2 cursor-pointer hover:text-brand-steelLight transition-colors min-h-[44px]">
+                                    ${product.title}
+                                </h3>
+                            </div>
+                        </div>
+
+                        <!-- Выбор размера, цена и кнопка в корзину -->
+                        <div class="p-5 pt-2 space-y-4">
+                            <!-- Селектор размеров -->
+                            <div>
+                                <div class="text-[11px] text-brand-muted mb-1.5">Размер / Вариант:</div>
+                                <div class="flex flex-wrap gap-1.5">
+                                    ${product.sizes.map(size => `
+                                        <button 
+                                            onclick="selectProductSize(${product.id}, '${size}')"
+                                            class="px-2.5 py-1 rounded-lg text-xs font-bold border transition-all ${
+                                                selectedSize === size
+                                                ? 'bg-brand-steel text-white border-brand-steelLight'
+                                                : 'bg-brand-bg text-brand-muted border-brand-border hover:border-brand-steel/60 hover:text-white'
+                                            }"
+                                        >
+                                            ${size}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <!-- Цена и кнопка -->
+                            <div class="pt-3 border-t border-brand-border/60 flex items-center justify-between gap-3">
+                                <div>
+                                    <div class="text-[11px] text-brand-muted">Цена в РФ</div>
+                                    <div class="text-lg font-extrabold text-white">${formatPrice(product.price)}</div>
+                                </div>
+                                <button 
+                                    onclick="addToCart(${product.id})"
+                                    class="px-4 py-2.5 rounded-xl bg-brand-red hover:bg-brand-redHover text-white text-xs sm:text-sm font-bold transition-all shadow-sm hover:shadow-glow-red flex items-center gap-1.5 active:scale-95"
+                                >
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                    </svg>
+                                    <span>В корзину</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        // Выбор размера на карточке
+        function selectProductSize(productId, size) {
+            state.selectedSizes[productId] = size;
+            renderProducts();
+        }
+
+        // Выбор артиста
+        function selectArtist(artist) {
+            state.artist = artist;
+            renderArtistTags();
+            renderProducts();
+        }
+
+        // Сброс фильтров
+        function resetFilters() {
+            state.category = 'all';
+            state.artist = 'Все артисты';
+            state.search = '';
+            document.getElementById('header-search').value = '';
+            document.getElementById('mobile-search').value = '';
+            document.getElementById('clear-search-btn').classList.add('hidden');
+            
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.category === 'all') {
+                    btn.classList.add('bg-brand-red', 'text-white', 'border-brand-red');
+                    btn.classList.remove('bg-brand-card', 'text-brand-muted', 'border-brand-border');
+                } else {
+                    btn.classList.remove('bg-brand-red', 'text-white', 'border-brand-red');
+                    btn.classList.add('bg-brand-card', 'text-brand-muted', 'border-brand-border');
+                }
+            });
+
+            renderArtistTags();
+            renderProducts();
+        }
+
+        // Обработчики кнопок категорий
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.category = btn.dataset.category;
+                document.querySelectorAll('.cat-btn').forEach(b => {
+                    b.classList.remove('bg-brand-red', 'text-white', 'border-brand-red');
+                    b.classList.add('bg-brand-card', 'text-brand-muted', 'border-brand-border');
+                });
+                btn.classList.add('bg-brand-red', 'text-white', 'border-brand-red');
+                btn.classList.remove('bg-brand-card', 'text-brand-muted', 'border-brand-border');
+                renderProducts();
+            });
+        });
+
+        // Поиск в реальном времени
+        function handleSearchInput(value) {
+            state.search = value;
+            const clearBtn = document.getElementById('clear-search-btn');
+            if (value.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            renderProducts();
+        }
+
+        document.getElementById('header-search').addEventListener('input', (e) => {
+            document.getElementById('mobile-search').value = e.target.value;
+            handleSearchInput(e.target.value);
+        });
+
+        document.getElementById('mobile-search').addEventListener('input', (e) => {
+            document.getElementById('header-search').value = e.target.value;
+            handleSearchInput(e.target.value);
+        });
+
+        document.getElementById('clear-search-btn').addEventListener('click', () => {
+            document.getElementById('header-search').value = '';
+            document.getElementById('mobile-search').value = '';
+            handleSearchInput('');
+        });
+
+        // Мобильное меню
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Модальное окно подробного описания товара
+        function openProductModal(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            const modal = document.getElementById('product-modal');
+            const content = document.getElementById('product-modal-content');
+            const selectedSize = state.selectedSizes[product.id];
+
+            content.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="h-64 sm:h-80 rounded-2xl bg-gradient-to-br ${product.gradient} border border-brand-border flex items-center justify-center relative overflow-hidden">
+                        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-brand-red text-white text-xs font-extrabold">
+                            100% ОРИГИНАЛ
+                        </span>
+                        ${renderProductVisual(product)}
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="text-xs font-bold text-brand-steelLight uppercase tracking-wider">${product.artist} • ${product.type}</div>
+                        <h3 class="text-2xl font-extrabold text-white leading-tight">${product.title}</h3>
+                        <div class="text-2xl font-black text-white">${formatPrice(product.price)}</div>
+
+                        <div class="p-3.5 rounded-xl bg-brand-surface border border-brand-border space-y-2 text-xs">
+                            <div class="flex items-start gap-2">
+                                <span class="text-emerald-400 font-bold">✓</span>
+                                <div><span class="text-white font-semibold">Источник выкупа:</span> <span class="text-brand-muted">${product.origin}</span></div>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-brand-steelLight font-bold">✓</span>
+                                <div><span class="text-white font-semibold">Характеристики:</span> <span class="text-brand-muted">${product.material}</span></div>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-brand-steelLight font-bold">✓</span>
+                                <div><span class="text-white font-semibold">Статус:</span> <span class="text-white">${product.statusLabel}</span></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-xs font-semibold text-brand-muted mb-2">Выберите размер:</div>
+                            <div class="flex flex-wrap gap-2">
+                                ${product.sizes.map(size => `
+                                    <button 
+                                        onclick="selectProductSize(${product.id}, '${size}'); openProductModal(${product.id});"
+                                        class="px-3.5 py-2 rounded-xl text-xs font-bold border transition-all ${
+                                            selectedSize === size
+                                            ? 'bg-brand-steel text-white border-brand-steelLight'
+                                            : 'bg-brand-bg text-brand-muted border-brand-border hover:text-white'
+                                        }"
+                                    >
+                                        ${size}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <button 
+                            onclick="addToCart(${product.id}); closeProductModal();"
+                            class="w-full py-3.5 rounded-xl bg-brand-red hover:bg-brand-redHover text-white font-bold text-sm transition-all shadow-glow-red"
+                        >
+                            Добавить в корзину — ${formatPrice(product.price)}
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Закрытие модального окна по клику вне карточки
+        document.getElementById('product-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'product-modal') closeProductModal();
+        });
+
+        // ========================================================= -->
+        // ЛОГИКА КОРЗИНЫ                                            -->
+        // ========================================================= -->
+        function toggleCart(open) {
+            const overlay = document.getElementById('cart-overlay');
+            const drawer = document.getElementById('cart-drawer');
+            if (open) {
+                overlay.classList.remove('hidden');
+                drawer.classList.remove('translate-x-full');
+            } else {
+                overlay.classList.add('hidden');
+                drawer.classList.add('translate-x-full');
+            }
+        }
+
+        function addToCart(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            const size = state.selectedSizes[productId];
+            const existing = state.cart.find(item => item.productId === productId && item.size === size);
+
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                state.cart.push({ productId, size, qty: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Добавлено: ${product.artist} (${size})`);
+        }
+
+        function changeCartQty(index, delta) {
+            state.cart[index].qty += delta;
+            if (state.cart[index].qty <= 0) {
+                state.cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function removeCartItem(index) {
+            state.cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalItems = state.cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-badge').textContent = totalItems;
+            document.getElementById('drawer-cart-count').textContent = totalItems;
+
+            const container = document.getElementById('cart-items-container');
+            const footer = document.getElementById('cart-footer');
+
+            if (state.cart.length === 0) {
+                footer.classList.add('hidden');
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center py-12">
+                        <div class="w-16 h-16 rounded-full bg-brand-surface border border-brand-border flex items-center justify-center text-brand-muted mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                        </div>
+                        <div class="text-lg font-bold text-white mb-1">Ваша корзина пуста</div>
+                        <p class="text-xs text-brand-muted max-w-xs mb-6">Добавьте оригинальный мерч из каталога, чтобы оформить доставку по России.</p>
+                        <button onclick="toggleCart(false)" class="px-5 py-2.5 rounded-xl bg-brand-card border border-brand-border hover:border-brand-steelLight text-sm font-semibold text-white">
+                            Перейти в каталог
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            footer.classList.remove('hidden');
+
+            let subtotal = 0;
+            container.innerHTML = state.cart.map((item, idx) => {
+                const product = PRODUCTS.find(p => p.id === item.productId);
+                const itemTotal = product.price * item.qty;
+                subtotal += itemTotal;
+
+                return `
+                    <div class="bg-brand-card border border-brand-border rounded-2xl p-4 flex gap-3.5 items-center">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br ${product.gradient} border border-brand-border/60 flex items-center justify-center shrink-0">
+                            <span class="text-xs font-black text-white">${product.type.slice(0, 4).toUpperCase()}</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-[11px] font-bold text-brand-steelLight uppercase truncate">${product.artist}</div>
+                            <div class="text-sm font-bold text-white truncate">${product.title}</div>
+                            <div class="text-xs text-brand-muted mt-0.5">Размер: <span class="text-white font-semibold">${item.size}</span></div>
+                            <div class="flex items-center justify-between mt-2">
+                                <div class="text-sm font-extrabold text-white">${formatPrice(itemTotal)}</div>
+                                <div class="flex items-center gap-2 bg-brand-bg border border-brand-border rounded-lg px-2 py-0.5">
+                                    <button onclick="changeCartQty(${idx}, -1)" class="text-brand-muted hover:text-white font-bold px-1">−</button>
+                                    <span class="text-xs font-bold text-white min-w-[14px] text-center">${item.qty}</span>
+                                    <button onclick="changeCartQty(${idx}, 1)" class="text-brand-muted hover:text-white font-bold px-1">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="removeCartItem(${idx})" class="text-brand-muted hover:text-brand-red p-1 self-start" title="Удалить">
+                            ✕
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            const shipping = parseInt(document.getElementById('delivery-method').value, 10);
+            document.getElementById('cart-subtotal').textContent = formatPrice(subtotal);
+            document.getElementById('cart-shipping').textContent = formatPrice(shipping);
+            document.getElementById('cart-total').textContent = formatPrice(subtotal + shipping);
+        }
+
+        // Оформление заказа из корзины
+        function submitOrder() {
+            const contactInput = document.getElementById('checkout-contact');
+            const contact = contactInput.value.trim();
+
+            if (!contact) {
+                contactInput.classList.add('border-brand-red');
+                showToast('Укажите Telegram или телефон для оформления заказа', true);
+                contactInput.focus();
+                return;
+            }
+
+            contactInput.classList.remove('border-brand-red');
+            const orderNumber = Math.floor(10000 + Math.random() * 90000);
+            state.cart = [];
+            contactInput.value = '';
+            updateCartUI();
+            toggleCart(false);
+
+            showToast(`Заказ #OM-${orderNumber} оформлен! Менеджер свяжется с вами (${contact})`);
+        }
+
+        // Обработка формы Консьерж-сервиса
+        document.getElementById('concierge-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const item = document.getElementById('concierge-item').value.trim();
+            const contact = document.getElementById('concierge-contact').value.trim();
+
+            const successBox = document.getElementById('concierge-success');
+            const successText = document.getElementById('concierge-success-text');
+
+            successText.textContent = `Мы получили запрос на «${item}». Наш байер проверит наличие в официальном зарубежном сторе и напишет вам в ${contact} в течение 15 минут.`;
+            successBox.classList.remove('hidden');
+
+            showToast('Заявка на индивидуальный выкуп отправлена!');
+            this.reset();
+        });
+
+        // Всплывающее уведомление (Toast)
+        function showToast(message, isError = false) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto p-4 rounded-xl border shadow-2xl backdrop-blur-md text-sm font-medium flex items-center gap-3 transition-all duration-300 ${
+                isError 
+                ? 'bg-red-950/90 border-brand-red text-white' 
+                : 'bg-brand-card/95 border-brand-steelLight/60 text-white'
+            }`;
+            toast.innerHTML = `
+                <span class="w-2.5 h-2.5 rounded-full shrink-0 ${isError ? 'bg-brand-red' : 'bg-emerald-400'}"></span>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(10px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Инициализация при загрузке
+        window.addEventListener('DOMContentLoaded', () => {
+            renderArtistTags();
+            renderProducts();
+            updateCartUI();
+        });
+    </script>
+</body>
+</html>
